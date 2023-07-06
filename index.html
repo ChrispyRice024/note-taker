@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <div id="workpad">
+            <h2>New Entry</h2>
+            <form id="new-note">
+                <input type="hidden" id="id"/>
+                <select name="catagory" id="category">
+                    <option value="" disabled selected hidden>Categories</option>
+                    <option value="character">Character</option>
+                    <option value="location">Location</option>
+                    <option value="item">Item</option>
+                    <option value="creature">Creature</option>
+                    <option value="faction">Faction</option>
+                    <option value="other">Other</option>
+                </select>
+                <input id="name" value="" type="text" placeholder="Name"/>
+                <textarea value="" id="details" rows="4" cols="50" form="new-note"></textarea>
+                <input id="submit" type="submit" value="Save Entry"/>
+            </form>
+        </div>
+        <div id="saved-notes">
+
+        </div>
+    </div>
+</body>
+<script src="script.js"></script>
+<script src="fetch.js"></script>
+</html>

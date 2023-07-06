@@ -1,0 +1,24 @@
+{
+  "name": "note-taker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "C:\\Users\\chris\\.nwjs\\nw.exe --enable-logging ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrispyRice024/note-taker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrispyRice024/note-taker/issues"
+  },
+  "homepage": "https://github.com/ChrispyRice024/note-taker#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
