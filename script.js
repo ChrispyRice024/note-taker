@@ -7,36 +7,54 @@ const fs = require('fs')
 id.setAttribute('value', Date.now())
 console.log(id.value)
 
-let fullData 
+let fullData
 
-fetch('./save')
-    .then(res => res.json())
-    .then(data => {
-        let fullData = data
+const fetchNotes = async () => {
+        // .then(res => res.json())
+        // .then(data => {
+            const response = await fetch('./save.json');
+            const data = await response.json();
+            
+            fullData = data
 
-        document.getElementById('submit').addEventListener('submit', function(e){
-            e.preventDefault()
+            const noteList = document.createElement('div')
+            noteList.setAttribute('class', 'note')
+            
+            for(let i=0; i < data.length; ++i){
 
-            var formData = {
-                id:id,
-                category:category,
-                name:name,
-                note:note
+                const noteCategory = document.createElement('p')
+                noteCategory.innerHTML = data[i].category
+                
+                const noteName = document.createElement('p')
+                noteName.innerHTML = data[i].name
+                
+                const note = document.createElement('p')
+                note.innerHTML = data[i].note
+
+                noteList.appendChild(noteCategory)
+                noteList.appendChild(noteName)
+                noteList.appendChild(note)
+
+                alert(data[i])
+                
             }
+}
 
-            fullData.push(formData)
+window.addEventListener('load', function(){
+    fetchNotes()
+    // alert(fullData)
+})
 
-            const stringData = JSON.stringify(fullData)
+document.addEventListener('submit', function(e){
+    e.preventDefault()
+    
+    const id = document.getElementById('id').value
+    const category = document.getElementById('category').value
+    const name = document.getElementById('name').value
+    const note = document.getElementById('note').value
 
-            fs.writeFile('./save.json', stringData, function(err){
-                if(err){
-                    alert('Error Saving File', err)
-                }else{
-                    alert('File Saved Successfully')
-                }
-            })
-        })
-    })
+    console.log(fullData)
+})
 
 // document.getElementById('submit').addEventListener('click', function(e){
 //     e.preventDefault()
