@@ -1,0 +1,14 @@
+.singleNote{
+    width:40vw;
+    border:3px solid black;
+    float: right;
+}
+
+#page{
+    display:flex;
+}
+
+#workpad{
+    width:40vw
+}
+

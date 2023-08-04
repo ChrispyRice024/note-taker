@@ -70,6 +70,7 @@
 // window.addEventListener('load', function(){
 //     fetchNotes()
 // })
+
 const idInput = document.getElementById('id')
 const categoryInput = document.getElementById('category');
 const nameInput = document.getElementById('name');
@@ -95,6 +96,37 @@ const fetchNotes = async () => {
     ).then(data=>{
       console.log(data)
       fullData = data
+
+      const noteList = document.createElement('div');
+      noteList.setAttribute('class', 'note');
+
+      for (let i = 0; i < fullData.length; ++i) {
+            const singleNote = document.createElement('div')
+            singleNote.setAttribute('class', 'singleNote')
+            const noteCategory = document.createElement('p');
+            const categoryTitle = document.createElement('h3')
+            categoryTitle.innerHTML = fullData[i].category ? 'Category' : null
+            noteCategory.innerHTML = fullData[i].category;
+        
+            const noteName = document.createElement('p');
+            const nameTitle = document.createElement('h3')
+            nameTitle.innerHTML = fullData[i].name ? 'Name' : null
+            noteName.innerHTML = fullData[i].name;
+        
+            const note = document.createElement('p');
+            const noteTitle = document.createElement('h3')
+            noteTitle.innerHTML = fullData[i].note ? 'Note' : null
+            note.innerHTML = fullData[i].note;
+        
+            singleNote.appendChild(categoryTitle)
+            singleNote.appendChild(noteCategory);
+            singleNote.appendChild(nameTitle)
+            singleNote.appendChild(noteName);
+            singleNote.appendChild(noteTitle)
+            singleNote.appendChild(note);
+            savedNotes.appendChild(singleNote)
+          }
+          
     })
   }catch(err){
     console.error('there was a problem', err)
