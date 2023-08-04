@@ -70,10 +70,10 @@
 // window.addEventListener('load', function(){
 //     fetchNotes()
 // })
-const idInput = document.getElementById('id').value;
-const categoryInput = document.getElementById('category').value;
-const nameInput = document.getElementById('name').value;
-const noteInput = document.getElementById('details').value;
+const idInput = document.getElementById('id')
+const categoryInput = document.getElementById('category');
+const nameInput = document.getElementById('name');
+const noteInput = document.getElementById('details');
 const submitButton = document.getElementById('submit');
 const savedNotes = document.getElementById('saved-notes');
 const form = document.getElementById('new-note');
@@ -81,46 +81,88 @@ const fs = require('fs');
 
 let fullData = [];
 
+let nameValue = ''
+let categoryValue = ''
+let noteValue = ''
+
+
+//finish displaying fetched data
 const fetchNotes = async () => {
-  const response = await fetch('./save.js');
-  const data = await response.json();
 
-  if(data){
-    fullData.push(data)
-  }else{
-    fullData = []
+  try{
+    const res = await fetch('./save.js').then(
+      res => res.json()
+    ).then(data=>{
+      console.log(data)
+      fullData = data
+    })
+  }catch(err){
+    console.error('there was a problem', err)
   }
+}
 
-  const noteList = document.createElement('div');
-  noteList.setAttribute('class', 'note');
+// const fetchNotes = async () => {
+//   try{
+//   const response = await fetch('./save.js').then()
+//   const data = await response ? response.json():null
+//   console.log("data", data.Promise)
+//   if(data){
+//     fullData.push(data)
+//     console.log('fullData', fullData[0])
+//   }else{
+//     return
+//   }
 
-  for (let i = 0; i < data.length; ++i) {
-    const noteCategory = document.createElement('p');
-    noteCategory.innerHTML = data[i].category;
+//   const noteList = document.createElement('div');
+//   noteList.setAttribute('class', 'note');
 
-    const noteName = document.createElement('p');
-    noteName.innerHTML = data[i].name;
+//   for (let i = 0; i < data.length; ++i) {
+//     const noteCategory = document.createElement('p');
+//     noteCategory.innerHTML = data[i].category;
 
-    const note = document.createElement('p');
-    note.innerHTML = data[i].note;
+//     const noteName = document.createElement('p');
+//     noteName.innerHTML = data[i].name;
 
-    noteList.appendChild(noteCategory);
-    noteList.appendChild(noteName);
-    noteList.appendChild(note);
-  }
+//     const note = document.createElement('p');
+//     note.innerHTML = data[i].note;
 
-  savedNotes.appendChild(noteList);
-};
+//     noteList.appendChild(noteCategory);
+//     noteList.appendChild(noteName);
+//     noteList.appendChild(note);
+//   }
 
+//   savedNotes.appendChild(noteList);
+// }catch(err){
+//   console.log(err)
+// }
+// }
+
+nameInput.addEventListener('change', function(e) {
+  e.preventDefault()
+
+  nameValue = e.target.value
+})
+
+categoryInput.addEventListener('change', function(e) {
+  e.preventDefault()
+
+  categoryValue = e.target.value
+})
+
+noteInput.addEventListener('change', function(e) {
+  e.preventDefault()
+
+  noteValue = e.target.value
+})
 submitButton.addEventListener('click', function(e) {
   e.preventDefault();
 
   const formData = {
-      ...form,
-      idInput,
-      nameInput,
-      categoryInput,
-      noteInput
+      // ...form,
+      id:Date.now(),
+      name:nameValue,
+      category:categoryValue,
+      note:noteValue
   };
 
   fullData.push(formData);
