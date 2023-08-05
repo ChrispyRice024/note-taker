@@ -2,6 +2,8 @@
     width:40vw;
     border:3px solid black;
     float: right;
+    border-color:#402D1F;
+    font:#503726;
 }
 
 #page{
@@ -9,6 +11,26 @@
 }
 
 #workpad{
-    width:40vw
+    width:40vw;
 }
 
+body{
+    background-color: #FDF2E9;
+    font-family: 'Edu SA Beginner', cursive;
+}
+
+#name{
+    margin-bottom:5px;
+}
+
+input, select{
+    font-family: 'Edu SA Beginner', cursive;
+}
+
+.noteTitle, .categoryTitle, .nameTitle{
+    text-align: center;
+}
+
+.note, .noteName, .noteCategory{
+    padding-left:5px;
+}
