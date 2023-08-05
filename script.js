@@ -48,6 +48,27 @@ const fetchNotes = async () => {
             noteTitle.setAttribute('class', 'noteTitle')
             noteTitle.innerHTML = fullData[i].note ? 'Note' : null
             note.innerHTML = fullData[i].note;
+
+            const deleteButton = document.createElement('button')
+            deleteButton.innerText = 'Delete'
+            deleteButton.addEventListener('click', function (){
+              console.log(i)
+              fullData.splice(i, 1)
+
+              const jsonData = JSON.stringify(fullData);
+
+              fs.writeFile('./save.js', jsonData, function(err) {
+                if (err) {
+                  alert('Error Deleting Note', err);
+                  window.location.reload()
+                } else {
+                  alert('Note Deleted');
+                  window.location.reload()
+                }
+                window.location.reload()
+                console.log(fullData);
+              });
+            })
         
             singleNote.appendChild(categoryTitle)
             singleNote.appendChild(noteCategory);
@@ -57,6 +78,8 @@ const fetchNotes = async () => {
 
             singleNote.appendChild(noteTitle)
             singleNote.appendChild(note);
+
+            singleNote.appendChild(deleteButton)
             
             savedNotes.appendChild(singleNote)
           }
