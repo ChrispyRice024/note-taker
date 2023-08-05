@@ -6,6 +6,7 @@ const submitButton = document.getElementById('submit');
 const savedNotes = document.getElementById('saved-notes');
 const form = document.getElementById('new-note');
 const fs = require('fs');
+const filter = document.getElementById('filter')
 
 let fullData = [];
 
@@ -25,6 +26,66 @@ const fetchNotes = async () => {
       noteList.setAttribute('class', 'note');
 
       for (let i = 0; i < fullData.length; ++i) {
+        if(filter.value === 'all'){
+            const singleNote = document.createElement('div')
+            singleNote.setAttribute('class', 'singleNote')
+
+            const noteCategory = document.createElement('p');
+            noteCategory.setAttribute('class', 'noteCategory')
+            const categoryTitle = document.createElement('h3')
+            categoryTitle.setAttribute('class', 'categoryTitle')
+            categoryTitle.innerHTML = fullData[i].category ? 'Category' : null
+            noteCategory.innerHTML = fullData[i].category;
+        
+            const noteName = document.createElement('p');
+            noteName.setAttribute('class', 'noteName')
+            const nameTitle = document.createElement('h3')
+            nameTitle.setAttribute('class', 'nameTitle')
+            nameTitle.innerHTML = fullData[i].name ? 'Name' : null
+            noteName.innerHTML = fullData[i].name;
+        
+            const note = document.createElement('p');
+            note.setAttribute('class', 'note')
+            const noteTitle = document.createElement('h3')
+            noteTitle.setAttribute('class', 'noteTitle')
+            noteTitle.innerHTML = fullData[i].note ? 'Note' : null
+            note.innerHTML = fullData[i].note;
+
+            const deleteButton = document.createElement('button')
+            deleteButton.innerText = 'Delete'
+            deleteButton.addEventListener('click', function (){
+              console.log(i)
+              fullData.splice(i, 1)
+
+              const jsonData = JSON.stringify(fullData);
+
+              fs.writeFile('./save.js', jsonData, function(err) {
+                if (err) {
+                  alert('Error Deleting Note', err);
+                  window.location.reload()
+                } else {
+                  alert('Note Deleted');
+                  window.location.reload()
+                }
+                window.location.reload()
+                console.log(fullData);
+              });
+            })
+        
+            singleNote.appendChild(categoryTitle)
+            singleNote.appendChild(noteCategory);
+
+            singleNote.appendChild(nameTitle)
+            singleNote.appendChild(noteName);
+
+            singleNote.appendChild(noteTitle)
+            singleNote.appendChild(note);
+
+            singleNote.appendChild(deleteButton)
+            
+            savedNotes.appendChild(singleNote)
+          }else if(filter.value === 'character' && fullData[i].category === 'character'){
+
             const singleNote = document.createElement('div')
             singleNote.setAttribute('class', 'singleNote')
 
@@ -84,7 +145,9 @@ const fetchNotes = async () => {
             savedNotes.appendChild(singleNote)
           }
           
-    })
+    }
+  }
+  )
   }catch(err){
     console.error('there was a problem', err)
   }
