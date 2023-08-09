@@ -9,6 +9,7 @@ const fs = require('fs');
 const filter = document.getElementById('filter')
 
 let fullData = [];
+//set the empty filter value
 
 let nameValue = ''
 let categoryValue = ''
