@@ -23,7 +23,7 @@ body{
     margin-bottom:5px;
 }
 
-input, select{
+input, select, textarea{
     font-family: 'Edu SA Beginner', cursive;
 }
 
