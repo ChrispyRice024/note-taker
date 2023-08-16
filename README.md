@@ -17,6 +17,8 @@ A simple application to take and manage notes.
 
 Note Taker is a web application that allows users to create and manage notes. It provides a user-friendly interface for adding notes with categories and details, as well as filtering notes based on different categories. The application is built using HTML, CSS, and JavaScript.
 
+*The filter feature is not yet functional, however the rest of the application works as intended*
+
 ## Features
 
 - Create new notes with categories and details.
